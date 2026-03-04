@@ -765,7 +765,8 @@ def view_tariff(call):
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_card_'))
 def pay_card(call):
-    index = int(call.data[9:])
+    # Исправлено: правильное извлечение индекса
+    index = int(call.data.split('_')[2])  # Берем третий элемент после разделения
     tariff = tariffs_data[index]
     
     card_number = PAYMENT_SETTINGS['card_number']
@@ -799,7 +800,8 @@ def pay_card(call):
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_ukr_card_'))
 def pay_ukr_card(call):
-    index = int(call.data[13:])
+    # Исправлено: правильное извлечение индекса
+    index = int(call.data.split('_')[3])  # Берем четвертый элемент (pay_ukr_card_11)
     tariff = tariffs_data[index]
     
     ukr_card_number = PAYMENT_SETTINGS['ukr_card_number']
@@ -834,7 +836,8 @@ def pay_ukr_card(call):
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_crypto_'))
 def pay_crypto(call):
-    index = int(call.data[11:])
+    # Исправлено: правильное извлечение индекса
+    index = int(call.data.split('_')[2])  # Берем третий элемент после разделения
     tariff = tariffs_data[index]
     
     text = f"""Тариф: {tariff['name']}
@@ -902,7 +905,8 @@ def pay_cryptobot(call):
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_stars_'))
 def pay_stars(call):
-    index = int(call.data[10:])
+    # Исправлено: правильное извлечение индекса
+    index = int(call.data.split('_')[2])  # Берем третий элемент после разделения
     tariff = tariffs_data[index]
     
     text = f"""Тариф: {tariff['name']}

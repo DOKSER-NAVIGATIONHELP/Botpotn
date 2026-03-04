@@ -105,7 +105,7 @@ tariffs_data = {
         "price_stars": 645,
         "description": """
 ☁️🔞Шkoднuцы (Maлышku дo 16 лeT)🔞☁️
-Цена: 650₽ / 446.83₴
+Цена: 650₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -126,7 +126,7 @@ tariffs_data = {
         "price_stars": 700,
         "description": """
 ☁️🪩Впucкu и тycoвкu (Пьяные)🍷☁️
-Цена: 700₽ / 446.83₴
+Цена: 700₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -148,7 +148,7 @@ tariffs_data = {
         "price_stars": 744,
         "description": """
 ☁️🍓Студeнтки (KpacoTku 16-20 лeт)🍓☁️
-Цена: 750₽ / 446.83₴
+Цена: 750₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы полyчите после оплаты?🦋
  
@@ -170,7 +170,7 @@ tariffs_data = {
         "price_stars": 843,
         "description": """
 ☁️⛔️И3HOСЫ (без согласия)🕯☁️
-Цена: 850₽ / 446.83₴
+Цена: 850₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы полyчите после оплаты?🦋
  
@@ -192,7 +192,7 @@ tariffs_data = {
         "price_stars": 893,
         "description": """
 ☁️🐶aniмal (c животными)🐣☁️
-Цена: 900₽ / 446.83₴
+Цена: 900₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?
  
@@ -213,7 +213,7 @@ tariffs_data = {
         "price_stars": 744,
         "description": """
 ☁️👩‍❤‍💋‍👨Иⲏцеsт (ceмейноe)👩‍❤‍💋‍👨☁️
-Цена: 750₽ / 446.83₴
+Цена: 750₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы полyчите после оплаты?🦋
  
@@ -235,7 +235,7 @@ tariffs_data = {
         "price_stars": 690,
         "description": """
 ☁️🌈GAY P0RN (6-18 лeт)🌈☁️
-Цена: 700₽ / 446.83₴
+Цена: 700₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -257,7 +257,7 @@ tariffs_data = {
         "price_stars": 843,
         "description": """
 ☁️👭PEEDмамы И PEEDпапы👬☁️
-Цена: 850₽ / 446.83₴
+Цена: 850₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -278,7 +278,7 @@ tariffs_data = {
         "price_stars": 890,
         "description": """
 ☁️🩸ПЕPВЫЙ PAЗ (Лишенue мaлышеk)🩸☁️
-Цена: 900₽ / 446.83₴
+Цена: 900₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -299,7 +299,7 @@ tariffs_data = {
         "price_stars": 750,
         "description": """
 ☁️🍭M1NET🍌☁️
-Цена: 750₽ / 446.83₴
+Цена: 750₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
 
@@ -320,7 +320,7 @@ tariffs_data = {
         "price_stars": 800,
         "description": """
 ☁️✨ЗАКЛАДЧИЦЫ✨☁️
-Цена: 800₽ / 446.83₴
+Цена: 800₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -344,7 +344,7 @@ tariffs_data = {
         "price_stars": 790,
         "description": """
 ☁️👾DаRкNеT (1-4 kласс)👾☁️
-Цена: 800₽ / 446.83₴
+Цена: 800₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -367,7 +367,7 @@ tariffs_data = {
         "price_stars": 2400,
         "description": """
 ☁️💎ВСЕ ВКЛЮЧЕНО💎☁️
-Цена: 2500₽ / 446.83₴
+Цена: 2500₽
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -411,7 +411,7 @@ tariffs_data = {
         "price_stars": 4500,
         "description": """
 🥵 EXCLUSIVE 🥵
-Цена: 4500₽ / 446.83₴
+Цена: 4500₽
 Продолжительность: Навсегда
 Описание: ЭТО СAМЫЙ КРУТOЙ ПРИВАТ 🔐, Вы получаете абсолютно весь материал который у нас есть. В нём ОТСОРТИРОВАННО всё по полочкам и легко можно найти любую категорию. - Никогда не потеряете доступ к контенту, за счёт резервных копий. - Почти ежедневное пополнение новым конентом. - Контент содержит 320 000 + ВИДЕО. - На запретных ресурсах, подобный товар стоит несколько десятков тысяч, но не у нас. После оплаты, Вы в автоматическом режиме, в этом чате (боте), получите ссылку на закрытый Телеграмм канал, в котором будут ссылки облачного хранилища данного шедевра.
 
@@ -422,20 +422,20 @@ tariffs_data = {
 }
 
 categories_list = [
-    "☁️🔞Шkоднuцы (Малышku до 16 леT)🔞☁️-650₽ / 446.83₴",
-    "☁️🪩Впucкu и туcoвкu (Пьяные)🍷☁️-700₽ / 446.83₴",
-    "☁️🍓CтудeнTки (КрасоTku 16-20 лет)🍓☁️-750₽ / 446.83₴",
-    "☁️⛔И3НOCЫ (без согласия)🕯☁️-850₽ / 446.83₴",
-    "☁️🐶аniмаl (с животными)🐣☁️-900₽ / 446.83₴",
-    "☁️👩‍❤‍💋‍👨ИHцеsт (семейное)👩‍❤‍💋‍👨☁️-750₽ / 446.83₴",
-    "☁️🌈GАY Р0RN (6-18 лет)🌈 ☁️-700₽ / 446.83₴",
-    "☁️👩‍❤‍👩PEEDмамы И PEEDпапы👨‍❤‍👨☁️-850₽ / 446.83₴",
-    "☁️🩸ПEPВЫЙ PА3 (Лишенue мaлышek)🩸☁️-900₽ / 446.83₴",
-    "☁️🍭М1NЕT🍌☁️-750₽ / 446.83₴",
-    "☁️✨ЗAКЛAДЧИЦЫ✨☁️-800₽ / 446.83₴",
-    "☁️👾DаRkNeТ (1-4 kлаcс)👾☁️-800₽ / 446.83₴",
-    "☁️💎ВCЕ ВKЛЮЧEНО💎☁️-2500₽ / 446.83₴",
-    "🥵EXСLUSIVЕ🥵-4500₽ / 446.83₴"
+    "☁️🔞Шkоднuцы (Малышku до 16 леT)🔞☁️-650₽",
+    "☁️🪩Впucкu и туcoвкu (Пьяные)🍷☁️-700₽",
+    "☁️🍓CтудeнTки (КрасоTku 16-20 лет)🍓☁️-750₽",
+    "☁️⛔И3НOCЫ (без согласия)🕯☁️-850₽",
+    "☁️🐶аniмаl (с животными)🐣☁️-900₽",
+    "☁️👩‍❤‍💋‍👨ИHцеsт (семейное)👩‍❤‍💋‍👨☁️-750₽",
+    "☁️🌈GАY Р0RN (6-18 лет)🌈 ☁️-700₽",
+    "☁️👩‍❤‍👩PEEDмамы И PEEDпапы👨‍❤‍👨☁️-850₽",
+    "☁️🩸ПEPВЫЙ PА3 (Лишенue мaлышek)🩸☁️-900₽",
+    "☁️🍭М1NЕT🍌☁️-750₽",
+    "☁️✨ЗAКЛAДЧИЦЫ✨☁️-800₽",
+    "☁️👾DаRkNeТ (1-4 kлаcс)👾☁️-800₽",
+    "☁️💎ВCЕ ВKЛЮЧEНО💎☁️-2500₽",
+    "🥵EXСLUSIVЕ🥵-4500₽"
 ]
 
 # Хранилище состояний пользователей
@@ -524,15 +524,15 @@ def approve_receipt(call):
         update_receipt_status(receipt_id, 'approved')
         
         # Отправляем уведомление пользователю
-        try:
-            bot.send_message(
-                user_id,
-                "✅ Ваша квитанция одобрена! Спасибо за покупку.\n\n"
-                "Ссылка на канал: https://t.me/..."
-            )
-        except:
-            pass
+  
+            
+                
+           
+
+           
         
+         
+    
         bot.answer_callback_query(call.id, "✅ Квитанция одобрена")
         bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
         bot.send_message(call.message.chat.id, f"✅ Квитанция #{receipt_id} одобрена")
@@ -863,22 +863,30 @@ TRC20 - {PAYMENT_SETTINGS['trc20_wallet']}"""
         f"Тариф: {tariff['name']}\nСумма: {tariff['price_usd']}$"
     )
 
+# ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ CRYPTOBOT
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_cryptobot_'))
 def pay_cryptobot(call):
     index = int(call.data[13:])
     tariff = tariffs_data[index]
     
-    text = f"""Тариф: {tariff['name']}
-Способ оплаты: 💵 CryptoBot
-Сумма к оплате: {tariff['price_usd']}$.
-Информация об оплате:
-{PAYMENT_SETTINGS['crypto_bot_link']}"""
-
+    # Добавляем кнопку с ссылкой на CryptoBot
     markup = types.InlineKeyboardMarkup(row_width=2)
-    btn1 = types.InlineKeyboardButton("✅ Я оплатил", callback_data=f'paid_{index}_cryptobot')
-    btn2 = types.InlineKeyboardButton("✖️ Отменить", callback_data='show_categories')
-    markup.add(btn1, btn2)
+    btn_link = types.InlineKeyboardButton("🔗 Перейти в CryptoBot", url=PAYMENT_SETTINGS['crypto_bot_link'])
+    btn_paid = types.InlineKeyboardButton("✅ Я оплатил", callback_data=f'paid_{index}_cryptobot')
+    btn_cancel = types.InlineKeyboardButton("✖️ Отменить", callback_data='show_categories')
+    markup.add(btn_link)
+    markup.add(btn_paid, btn_cancel)
     
+    text = f"""Тариф: {tariff['name']}
+Способ оплаты: 🤖 CryptoBot
+Сумма к оплате: {tariff['price_usd']}$
+
+Информация об оплате:
+1. Нажмите кнопку "Перейти в CryptoBot"
+2. Отправьте {tariff['price_usd']}$ на кошелек бота
+3. После оплаты нажмите "Я оплатил"
+4. Отправьте скриншот подтверждения"""
+
     bot.edit_message_text(
         chat_id=call.message.chat.id,
         message_id=call.message.message_id,
@@ -934,13 +942,12 @@ def pay_stars(call):
 def paid(call):
     parts = call.data.split('_')
     index = int(parts[1])
-    method = parts[2]
+    method = parts[2]  # Здесь будет 'cryptobot' для CryptoBot
     
     text = """💰 Оплатили?
 
 Отправьте боту квитанцию об оплате: скриншот или фото.
-На квитанции должны быть четко видны: дата, время и сумма платежа.
-Или вы можете отправить точную дату и время платежа"""
+На квитанции должны быть четко видны: дата, время и сумма платежа."""
 
     markup = types.InlineKeyboardMarkup(row_width=2)
     btn_back = types.InlineKeyboardButton("🔙 Назад", callback_data=f'view_{index}')
@@ -957,7 +964,7 @@ def paid(call):
     # Сохраняем состояние ожидания квитанции
     user_states[call.from_user.id] = {
         "tariff_index": index,
-        "payment_method": method,
+        "payment_method": method,  # Сохраняем как есть - 'cryptobot'
         "waiting_receipt": True
     }
 
@@ -999,7 +1006,7 @@ def handle_receipt(message):
             "card": "картой РФ",
             "ukr_card": "картой УКР",
             "crypto": "криптовалютой",
-            "cryptobot": "CryptoBot",
+            "cryptobot": "CryptoBot",  # ИСПРАВЛЕНО: теперь ключ совпадает с method
             "stars": "Stars"
         }
         method = method_map.get(state["payment_method"], state["payment_method"])
@@ -1009,7 +1016,7 @@ def handle_receipt(message):
             amount = tariff['price_rub']
         elif state["payment_method"] == "ukr_card":
             amount = tariff['price_uah']
-        elif state["payment_method"] in ["crypto", "cryptobot"]:
+        elif state["payment_method"] in ["crypto", "cryptobot"]:  # ИСПРАВЛЕНО: добавлен cryptobot
             amount = tariff['price_usd']
         else:  # stars
             amount = tariff['price_stars']

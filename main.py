@@ -517,16 +517,8 @@ def support(message):
 ➡ <b>Написать в поддержку:</b> @{PAYMENT_SETTINGS['support_username']}
 """
     
-    try:
-        photo_url = "https://s1.radikal.cloud/2026/03/04/1000227599dd13e11a4380e5bf.jpg"
-        response = requests.get(photo_url)
-        if response.status_code == 200:
-            photo = BytesIO(response.content)
-            bot.send_photo(message.chat.id, photo, caption=support_text, parse_mode='HTML')
-        else:
-            bot.send_message(message.chat.id, support_text, parse_mode='HTML')
-    except:
-        bot.send_message(message.chat.id, support_text, parse_mode='HTML')
+    # Просто отправляем текст без фото
+    bot.send_message(message.chat.id, support_text, parse_mode='HTML')
 
 @bot.callback_query_handler(func=lambda call: call.data == 'show_categories')
 def show_categories(call):

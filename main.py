@@ -12,6 +12,7 @@ ADMIN_IDS = [760217595]  # Список админов
 # Настройки оплаты (можно менять)
 PAYMENT_SETTINGS = {
     "card_number": "2204320942838634",
+    "ukr_card_number": "5100947332611649",  # Украинская карта
     "crypto_bot_link": "http://t.me/send?start=IVYmg0VNAOof",
     "ton_wallet": "UQDZLYLq_FZkjdBSKxKC75xDV_q4j1Jl9yY4SIbg5Rkk6Op_",
     "trc20_wallet": "TRvgVquVHPaddvWRJL7p5z5phM2sLSQqsf",
@@ -21,7 +22,7 @@ PAYMENT_SETTINGS = {
 
 # Инициализация БД
 def init_db():
-    conn = sqlite3.connect('bot_database.db', check_same_thread=False)
+    conn = sqlite3.connect('bot_database.db', check_s_same_thread=False)
     c = conn.cursor()
     
     # Таблица пользователей
@@ -76,10 +77,11 @@ tariffs_data = {
         "name": "☁️🔞Шkoднuцы (Maлышku дo 16 лeT)🔞☁️",
         "price_rub": 650,
         "price_usd": 8.38,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 645,
         "description": """
 ☁️🔞Шkoднuцы (Maлышku дo 16 лeT)🔞☁️
-Цена: 650₽
+Цена: 650₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -96,10 +98,11 @@ tariffs_data = {
         "name": "☁️🪩Впucкu и тycoвкu (Пьяные)🍷☁️",
         "price_rub": 700,
         "price_usd": 9.02,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 700,
         "description": """
 ☁️🪩Впucкu и тycoвкu (Пьяные)🍷☁️
-Цена: 700₽
+Цена: 700₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -117,10 +120,11 @@ tariffs_data = {
         "name": "☁️🍓Студeнтки (KpacoTku 16-20 лeт)🍓☁️",
         "price_rub": 750,
         "price_usd": 9.66,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 744,
         "description": """
 ☁️🍓Студeнтки (KpacoTku 16-20 лeт)🍓☁️
-Цена: 750₽
+Цена: 750₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы полyчите после оплаты?🦋
  
@@ -138,10 +142,11 @@ tariffs_data = {
         "name": "☁️⛔️И3HOСЫ (без согласия)🕯☁️",
         "price_rub": 850,
         "price_usd": 10.95,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 843,
         "description": """
 ☁️⛔️И3HOСЫ (без согласия)🕯☁️
-Цена: 850₽
+Цена: 850₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы полyчите после оплаты?🦋
  
@@ -159,10 +164,11 @@ tariffs_data = {
         "name": "☁️🐶aniмal (c животными)🐣☁️",
         "price_rub": 900,
         "price_usd": 11.6,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 893,
         "description": """
 ☁️🐶aniмal (c животными)🐣☁️
-Цена: 900₽
+Цена: 900₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?
  
@@ -179,10 +185,11 @@ tariffs_data = {
         "name": "☁️👩‍❤‍💋‍👨Иⲏцеsт (ceмейноe)👩‍❤‍💋‍👨☁️",
         "price_rub": 750,
         "price_usd": 9.66,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 744,
         "description": """
 ☁️👩‍❤‍💋‍👨Иⲏцеsт (ceмейноe)👩‍❤‍💋‍👨☁️
-Цена: 750₽
+Цена: 750₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы полyчите после оплаты?🦋
  
@@ -200,10 +207,11 @@ tariffs_data = {
         "name": "☁️🌈GAY P0RN (6-18 лeт)🌈☁️",
         "price_rub": 700,
         "price_usd": 9.02,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 690,
         "description": """
 ☁️🌈GAY P0RN (6-18 лeт)🌈☁️
-Цена: 700₽
+Цена: 700₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -221,10 +229,11 @@ tariffs_data = {
         "name": "☁️👭PEEDмамы И PEEDпапы👬☁️",
         "price_rub": 850,
         "price_usd": 10.95,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 843,
         "description": """
 ☁️👭PEEDмамы И PEEDпапы👬☁️
-Цена: 850₽
+Цена: 850₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -241,10 +250,11 @@ tariffs_data = {
         "name": "☁️🩸ПЕPВЫЙ PAЗ (Лишенue мaлышеk)🩸☁️",
         "price_rub": 900,
         "price_usd": 11.6,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 890,
         "description": """
 ☁️🩸ПЕPВЫЙ PAЗ (Лишенue мaлышеk)🩸☁️
-Цена: 900₽
+Цена: 900₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -261,10 +271,11 @@ tariffs_data = {
         "name": "☁️🍭M1NET🍌☁️",
         "price_rub": 750,
         "price_usd": 9.66,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 750,
         "description": """
 ☁️🍭M1NET🍌☁️
-Цена: 750₽
+Цена: 750₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
 
@@ -281,10 +292,11 @@ tariffs_data = {
         "name": "☁️✨ЗАКЛАДЧИЦЫ✨☁️",
         "price_rub": 800,
         "price_usd":  10.31,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 800,
         "description": """
 ☁️✨ЗАКЛАДЧИЦЫ✨☁️
-Цена: 800₽
+Цена: 800₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -304,10 +316,11 @@ tariffs_data = {
         "name": "☁️👾DаRкNеT (1-4 kласс)👾☁️",
         "price_rub": 800,
         "price_usd": 10.31,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 790,
         "description": """
 ☁️👾DаRкNеT (1-4 kласс)👾☁️
-Цена: 800₽
+Цена: 800₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -326,10 +339,11 @@ tariffs_data = {
         "name": "☁️💎ВСЕ ВКЛЮЧЕНО💎☁️",
         "price_rub": 2500,
         "price_usd": 32.21,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 2400,
         "description": """
 ☁️💎ВСЕ ВКЛЮЧЕНО💎☁️
-Цена: 2500₽
+Цена: 2500₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: 🦋Что вы получите после оплаты?🦋
  
@@ -369,10 +383,11 @@ tariffs_data = {
         "name": "🥵 EXCLUSIVE 🥵",
         "price_rub": 4500,
         "price_usd": 48,
+        "price_uah": 446.83,  # Добавлена цена в гривнах
         "price_stars": 4500,
         "description": """
 🥵 EXCLUSIVE 🥵
-Цена: 4500₽
+Цена: 4500₽ / 446.83₴
 Продолжительность: Навсегда
 Описание: ЭТО СAМЫЙ КРУТOЙ ПРИВАТ 🔐, Вы получаете абсолютно весь материал который у нас есть. В нём ОТСОРТИРОВАННО всё по полочкам и легко можно найти любую категорию. - Никогда не потеряете доступ к контенту, за счёт резервных копий. - Почти ежедневное пополнение новым конентом. - Контент содержит 320 000 + ВИДЕО. - На запретных ресурсах, подобный товар стоит несколько десятков тысяч, но не у нас. После оплаты, Вы в автоматическом режиме, в этом чате (боте), получите ссылку на закрытый Телеграмм канал, в котором будут ссылки облачного хранилища данного шедевра.
 
@@ -383,20 +398,20 @@ tariffs_data = {
 }
 
 categories_list = [
-    "☁️🔞Шkоднuцы (Малышku до 16 леT)🔞☁️-650₽",
-    "☁️🪩Впucкu и туcoвкu (Пьяные)🍷☁️-700₽",
-    "☁️🍓CтудeнTки (КрасоTku 16-20 лет)🍓☁️-750₽",
-    "☁️⛔И3НOCЫ (без согласия)🕯☁️-850₽",
-    "☁️🐶аniмаl (с животными)🐣☁️-900₽",
-    "☁️👩‍❤‍💋‍👨ИHцеsт (семейное)👩‍❤‍💋‍👨☁️-750₽",
-    "☁️🌈GАY Р0RN (6-18 лет)🌈 ☁️-700₽",
-    "☁️👩‍❤‍👩PEEDмамы И PEEDпапы👨‍❤‍👨☁️-850₽",
-    "☁️🩸ПEPВЫЙ PА3 (Лишенue мaлышek)🩸☁️-900₽",
-    "☁️🍭М1NЕT🍌☁️-750₽",
-    "☁️✨ЗAКЛAДЧИЦЫ✨☁️-800₽",
-    "☁️👾DаRkNeТ (1-4 kлаcс)👾☁️-800₽",
-    "☁️💎ВCЕ ВKЛЮЧEНО💎☁️-2500₽",
-    "🥵EXСLUSIVЕ🥵-4500₽"
+    "☁️🔞Шkоднuцы (Малышku до 16 леT)🔞☁️-650₽ / 446.83₴",
+    "☁️🪩Впucкu и туcoвкu (Пьяные)🍷☁️-700₽ / 446.83₴",
+    "☁️🍓CтудeнTки (КрасоTku 16-20 лет)🍓☁️-750₽ / 446.83₴",
+    "☁️⛔И3НOCЫ (без согласия)🕯☁️-850₽ / 446.83₴",
+    "☁️🐶аniмаl (с животными)🐣☁️-900₽ / 446.83₴",
+    "☁️👩‍❤‍💋‍👨ИHцеsт (семейное)👩‍❤‍💋‍👨☁️-750₽ / 446.83₴",
+    "☁️🌈GАY Р0RN (6-18 лет)🌈 ☁️-700₽ / 446.83₴",
+    "☁️👩‍❤‍👩PEEDмамы И PEEDпапы👨‍❤‍👨☁️-850₽ / 446.83₴",
+    "☁️🩸ПEPВЫЙ PА3 (Лишенue мaлышek)🩸☁️-900₽ / 446.83₴",
+    "☁️🍭М1NЕT🍌☁️-750₽ / 446.83₴",
+    "☁️✨ЗAКЛAДЧИЦЫ✨☁️-800₽ / 446.83₴",
+    "☁️👾DаRkNeТ (1-4 kлаcс)👾☁️-800₽ / 446.83₴",
+    "☁️💎ВCЕ ВKЛЮЧEНО💎☁️-2500₽ / 446.83₴",
+    "🥵EXСLUSIVЕ🥵-4500₽ / 446.83₴"
 ]
 
 # Хранилище состояний пользователей
@@ -542,12 +557,14 @@ def view_tariff(call):
     
     markup = types.InlineKeyboardMarkup(row_width=2)
     btn1 = types.InlineKeyboardButton("🇷🇺 Карта РФ", callback_data=f'pay_card_{index}')
-    btn2 = types.InlineKeyboardButton("💵 Крипта", callback_data=f'pay_crypto_{index}')
-    btn3 = types.InlineKeyboardButton("🤖 CryptoBot", callback_data=f'pay_cryptobot_{index}')
-    btn4 = types.InlineKeyboardButton("⭐️ Stars", callback_data=f'pay_stars_{index}')
+    btn2 = types.InlineKeyboardButton("🇺🇦 Карта УКР", callback_data=f'pay_ukr_card_{index}')  # Новая кнопка
+    btn3 = types.InlineKeyboardButton("💵 Крипта", callback_data=f'pay_crypto_{index}')
+    btn4 = types.InlineKeyboardButton("🤖 CryptoBot", callback_data=f'pay_cryptobot_{index}')
+    btn5 = types.InlineKeyboardButton("⭐️ Stars", callback_data=f'pay_stars_{index}')
     btn_back = types.InlineKeyboardButton("🔙 Назад", callback_data='show_categories')
     markup.add(btn1, btn2)
     markup.add(btn3, btn4)
+    markup.add(btn5)
     markup.add(btn_back)
     
     bot.edit_message_text(
@@ -589,9 +606,47 @@ def pay_card(call):
     
     # Уведомление админам
     notify_admins(
-        "💳 Запрос на оплату картой", 
+        "💳 Запрос на оплату картой РФ", 
         call.from_user,
         f"Тариф: {tariff['name']}\nСумма: {tariff['price_rub']}₽"
+    )
+
+# Новая функция для оплаты украинской картой
+@bot.callback_query_handler(func=lambda call: call.data.startswith('pay_ukr_card_'))
+def pay_ukr_card(call):
+    index = int(call.data[13:])
+    tariff = tariffs_data[index]
+    
+    # Номер украинской карты
+    ukr_card_number = PAYMENT_SETTINGS['ukr_card_number']
+    
+    text = f"<b>Тариф:</b> {tariff['name']}\n" \
+           f"<b>Способ оплаты:</b> 🇺🇦 Оплата картой УКР\n" \
+           f"<b>Сумма к оплате:</b> {tariff['price_uah']}₴\n\n" \
+           f"<b>Информация об оплате:</b>\n" \
+           f"У вас 15 минут на оплату\n\n" \
+           f"<code>{ukr_card_number}</code>\n" \
+           f"(нажмите на номер выше, чтобы скопировать)\n\n" \
+           f"<b>Банк:</b> OTP Bank"
+
+    markup = types.InlineKeyboardMarkup(row_width=2)
+    btn1 = types.InlineKeyboardButton("✅ Я оплатил", callback_data=f'paid_{index}_ukr_card')
+    btn2 = types.InlineKeyboardButton("✖️ Отменить", callback_data='show_categories')
+    markup.add(btn1, btn2)
+    
+    bot.edit_message_text(
+        chat_id=call.message.chat.id,
+        message_id=call.message.message_id,
+        text=text,
+        reply_markup=markup,
+        parse_mode='HTML'
+    )
+    
+    # Уведомление админам
+    notify_admins(
+        "💳 Запрос на оплату картой УКР", 
+        call.from_user,
+        f"Тариф: {tariff['name']}\nСумма: {tariff['price_uah']}₴"
     )
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_crypto_'))
@@ -735,12 +790,23 @@ def handle_receipt(message):
         state = user_states[user_id]
         tariff = tariffs_data[state["tariff_index"]]
         method_map = {
-            "card": "картой",
+            "card": "картой РФ",
+            "ukr_card": "картой УКР",  # Добавлен новый метод
             "crypto": "криптовалютой",
             "cryptobot": "CryptoBot",
             "stars": "Stars"
         }
         method = method_map.get(state["payment_method"], state["payment_method"])
+        
+        # Определяем сумму в зависимости от метода оплаты
+        if state["payment_method"] == "card":
+            amount = tariff['price_rub']
+        elif state["payment_method"] == "ukr_card":
+            amount = tariff['price_uah']
+        elif state["payment_method"] in ["crypto", "cryptobot"]:
+            amount = tariff['price_usd']
+        else:  # stars
+            amount = tariff['price_stars']
         
         # Сохраняем квитанцию в БД
         if message.content_type == 'photo':
@@ -748,20 +814,20 @@ def handle_receipt(message):
                 user_id, 
                 tariff['name'], 
                 method, 
-                tariff['price_rub'] if state["payment_method"] == "card" else tariff['price_usd'],
+                amount,
                 message.caption,
                 message.photo[-1].file_id
             )
             
             # Уведомление админам с фото
-            caption = f"📸 Получена квитанция (фото)\n\n👤 Пользователь: {message.from_user.first_name} (@{message.from_user.username}) ID: {user_id}\nТариф: {tariff['name']}\nСпособ оплаты: {method}"
+            caption = f"📸 Получена квитанция (фото)\n\n👤 Пользователь: {message.from_user.first_name} (@{message.from_user.username}) ID: {user_id}\nТариф: {tariff['name']}\nСпособ оплаты: {method}\nСумма: {amount}"
             notify_admins_photo(message.from_user, message.photo[-1].file_id, caption)
         else:
             add_receipt(
                 user_id, 
                 tariff['name'], 
                 method, 
-                tariff['price_rub'] if state["payment_method"] == "card" else tariff['price_usd'],
+                amount,
                 message.text
             )
             
@@ -769,7 +835,7 @@ def handle_receipt(message):
             notify_admins(
                 "📝 Получена квитанция (текст)", 
                 message.from_user,
-                f"Тариф: {tariff['name']}\nСпособ оплаты: {method}\n\nТекст: {message.text}"
+                f"Тариф: {tariff['name']}\nСпособ оплаты: {method}\nСумма: {amount}\n\nТекст: {message.text}"
             )
         
         # Ответ пользователю

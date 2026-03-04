@@ -22,7 +22,7 @@ PAYMENT_SETTINGS = {
 
 # Инициализация БД
 def init_db():
-    conn = sqlite3.connect('bot_database.db', check_s_same_thread=False)
+    conn = sqlite3.connect('bot_database.db', check_same_thread=False)  # Исправлено check_s_same_thread -> check_same_thread
     c = conn.cursor()
     
     # Таблица пользователей
@@ -41,7 +41,8 @@ def init_db():
                   amount REAL,
                   receipt_text TEXT,
                   receipt_photo_id TEXT,
-                  date TEXT)''')
+                  date TEXT,
+                  status TEXT DEFAULT 'pending')''')  # Добавлен статус
     
     conn.commit()
     conn.close()
@@ -63,13 +64,36 @@ def add_receipt(user_id, tariff_name, payment_method, amount, receipt_text=None,
     c = conn.cursor()
     date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     c.execute('''INSERT INTO receipts 
-                 (user_id, tariff_name, payment_method, amount, receipt_text, receipt_photo_id, date)
-                 VALUES (?, ?, ?, ?, ?, ?, ?)''',
-              (user_id, tariff_name, payment_method, amount, receipt_text, receipt_photo_id, date))
+                 (user_id, tariff_name, payment_method, amount, receipt_text, receipt_photo_id, date, status)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
+              (user_id, tariff_name, payment_method, amount, receipt_text, receipt_photo_id, date, 'pending'))
     receipt_id = c.lastrowid
     conn.commit()
     conn.close()
     return receipt_id
+
+def update_receipt_status(receipt_id, status):
+    conn = sqlite3.connect('bot_database.db')
+    c = conn.cursor()
+    c.execute("UPDATE receipts SET status = ? WHERE id = ?", (status, receipt_id))
+    conn.commit()
+    conn.close()
+
+def get_pending_receipts():
+    conn = sqlite3.connect('bot_database.db')
+    c = conn.cursor()
+    c.execute("SELECT id, user_id, tariff_name, payment_method, amount, date FROM receipts WHERE status = 'pending' ORDER BY date DESC")
+    receipts = c.fetchall()
+    conn.close()
+    return receipts
+
+def get_receipt_by_id(receipt_id):
+    conn = sqlite3.connect('bot_database.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM receipts WHERE id = ?", (receipt_id,))
+    receipt = c.fetchone()
+    conn.close()
+    return receipt
 
 # Словарь с описаниями и ценами
 tariffs_data = {
@@ -77,7 +101,7 @@ tariffs_data = {
         "name": "☁️🔞Шkoднuцы (Maлышku дo 16 лeT)🔞☁️",
         "price_rub": 650,
         "price_usd": 8.38,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 363,
         "price_stars": 645,
         "description": """
 ☁️🔞Шkoднuцы (Maлышku дo 16 лeT)🔞☁️
@@ -98,7 +122,7 @@ tariffs_data = {
         "name": "☁️🪩Впucкu и тycoвкu (Пьяные)🍷☁️",
         "price_rub": 700,
         "price_usd": 9.02,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 390,
         "price_stars": 700,
         "description": """
 ☁️🪩Впucкu и тycoвкu (Пьяные)🍷☁️
@@ -120,7 +144,7 @@ tariffs_data = {
         "name": "☁️🍓Студeнтки (KpacoTku 16-20 лeт)🍓☁️",
         "price_rub": 750,
         "price_usd": 9.66,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 418,
         "price_stars": 744,
         "description": """
 ☁️🍓Студeнтки (KpacoTku 16-20 лeт)🍓☁️
@@ -142,7 +166,7 @@ tariffs_data = {
         "name": "☁️⛔️И3HOСЫ (без согласия)🕯☁️",
         "price_rub": 850,
         "price_usd": 10.95,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 474,
         "price_stars": 843,
         "description": """
 ☁️⛔️И3HOСЫ (без согласия)🕯☁️
@@ -164,7 +188,7 @@ tariffs_data = {
         "name": "☁️🐶aniмal (c животными)🐣☁️",
         "price_rub": 900,
         "price_usd": 11.6,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 502,
         "price_stars": 893,
         "description": """
 ☁️🐶aniмal (c животными)🐣☁️
@@ -185,7 +209,7 @@ tariffs_data = {
         "name": "☁️👩‍❤‍💋‍👨Иⲏцеsт (ceмейноe)👩‍❤‍💋‍👨☁️",
         "price_rub": 750,
         "price_usd": 9.66,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 418,
         "price_stars": 744,
         "description": """
 ☁️👩‍❤‍💋‍👨Иⲏцеsт (ceмейноe)👩‍❤‍💋‍👨☁️
@@ -207,7 +231,7 @@ tariffs_data = {
         "name": "☁️🌈GAY P0RN (6-18 лeт)🌈☁️",
         "price_rub": 700,
         "price_usd": 9.02,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 390,
         "price_stars": 690,
         "description": """
 ☁️🌈GAY P0RN (6-18 лeт)🌈☁️
@@ -229,7 +253,7 @@ tariffs_data = {
         "name": "☁️👭PEEDмамы И PEEDпапы👬☁️",
         "price_rub": 850,
         "price_usd": 10.95,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 474,
         "price_stars": 843,
         "description": """
 ☁️👭PEEDмамы И PEEDпапы👬☁️
@@ -250,7 +274,7 @@ tariffs_data = {
         "name": "☁️🩸ПЕPВЫЙ PAЗ (Лишенue мaлышеk)🩸☁️",
         "price_rub": 900,
         "price_usd": 11.6,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 502,
         "price_stars": 890,
         "description": """
 ☁️🩸ПЕPВЫЙ PAЗ (Лишенue мaлышеk)🩸☁️
@@ -271,7 +295,7 @@ tariffs_data = {
         "name": "☁️🍭M1NET🍌☁️",
         "price_rub": 750,
         "price_usd": 9.66,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 418,
         "price_stars": 750,
         "description": """
 ☁️🍭M1NET🍌☁️
@@ -292,7 +316,7 @@ tariffs_data = {
         "name": "☁️✨ЗАКЛАДЧИЦЫ✨☁️",
         "price_rub": 800,
         "price_usd":  10.31,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 446.83,
         "price_stars": 800,
         "description": """
 ☁️✨ЗАКЛАДЧИЦЫ✨☁️
@@ -316,7 +340,7 @@ tariffs_data = {
         "name": "☁️👾DаRкNеT (1-4 kласс)👾☁️",
         "price_rub": 800,
         "price_usd": 10.31,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 446.83,
         "price_stars": 790,
         "description": """
 ☁️👾DаRкNеT (1-4 kласс)👾☁️
@@ -339,7 +363,7 @@ tariffs_data = {
         "name": "☁️💎ВСЕ ВКЛЮЧЕНО💎☁️",
         "price_rub": 2500,
         "price_usd": 32.21,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 1396,
         "price_stars": 2400,
         "description": """
 ☁️💎ВСЕ ВКЛЮЧЕНО💎☁️
@@ -383,7 +407,7 @@ tariffs_data = {
         "name": "🥵 EXCLUSIVE 🥵",
         "price_rub": 4500,
         "price_usd": 48,
-        "price_uah": 446.83,  # Добавлена цена в гривнах
+        "price_uah": 2513,
         "price_stars": 4500,
         "description": """
 🥵 EXCLUSIVE 🥵
@@ -416,6 +440,7 @@ categories_list = [
 
 # Хранилище состояний пользователей
 user_states = {}
+admin_reply_states = {}  # Для отслеживания ответов админа
 
 # Функция для отправки уведомлений админам
 def notify_admins(action, user, details=""):
@@ -433,6 +458,171 @@ def notify_admins_photo(user, photo, caption=""):
             bot.send_photo(admin_id, photo, caption=caption)
         except:
             pass
+
+# Команда для админов
+@bot.message_handler(commands=['admin'])
+def admin_panel(message):
+    if message.from_user.id not in ADMIN_IDS:
+        return
+    
+    markup = types.InlineKeyboardMarkup(row_width=1)
+    btn1 = types.InlineKeyboardButton("📋 Ожидающие квитанции", callback_data='admin_pending')
+    btn2 = types.InlineKeyboardButton("📊 Статистика", callback_data='admin_stats')
+    markup.add(btn1, btn2)
+    
+    bot.send_message(message.chat.id, "🔐 Админ-панель", reply_markup=markup)
+
+@bot.callback_query_handler(func=lambda call: call.data == 'admin_pending')
+def admin_pending(call):
+    if call.from_user.id not in ADMIN_IDS:
+        return
+    
+    receipts = get_pending_receipts()
+    
+    if not receipts:
+        bot.send_message(call.message.chat.id, "✅ Нет ожидающих квитанций")
+        return
+    
+    for receipt in receipts:
+        receipt_id, user_id, tariff_name, method, amount, date = receipt
+        
+        # Получаем информацию о пользователе
+        try:
+            user_info = bot.get_chat(user_id)
+            username = f"@{user_info.username}" if user_info.username else "Нет username"
+            name = user_info.first_name
+        except:
+            username = "Неизвестно"
+            name = "Неизвестно"
+        
+        text = f"📝 Квитанция #{receipt_id}\n"
+        text += f"👤 Пользователь: {name} ({username})\n"
+        text += f"📦 Тариф: {tariff_name}\n"
+        text += f"💳 Способ: {method}\n"
+        text += f"💰 Сумма: {amount}\n"
+        text += f"📅 Дата: {date}\n"
+        
+        markup = types.InlineKeyboardMarkup(row_width=2)
+        btn_approve = types.InlineKeyboardButton("✅ Подтвердить", callback_data=f'approve_{receipt_id}')
+        btn_reject = types.InlineKeyboardButton("❌ Отклонить", callback_data=f'reject_{receipt_id}')
+        btn_reply = types.InlineKeyboardButton("💬 Ответить", callback_data=f'reply_{receipt_id}')
+        markup.add(btn_approve, btn_reject)
+        markup.add(btn_reply)
+        
+        bot.send_message(call.message.chat.id, text, reply_markup=markup)
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith('approve_'))
+def approve_receipt(call):
+    if call.from_user.id not in ADMIN_IDS:
+        return
+    
+    receipt_id = int(call.data.split('_')[1])
+    receipt = get_receipt_by_id(receipt_id)
+    
+    if receipt:
+        user_id = receipt[1]
+        update_receipt_status(receipt_id, 'approved')
+        
+        # Отправляем уведомление пользователю
+        try:
+            bot.send_message(
+                user_id,
+                "✅ Ваша квитанция одобрена! Спасибо за покупку.\n\n"
+                "Ссылка на канал: https://t.me/..."
+            )
+        except:
+            pass
+        
+        bot.answer_callback_query(call.id, "✅ Квитанция одобрена")
+        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
+        bot.send_message(call.message.chat.id, f"✅ Квитанция #{receipt_id} одобрена")
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith('reject_'))
+def reject_receipt(call):
+    if call.from_user.id not in ADMIN_IDS:
+        return
+    
+    receipt_id = int(call.data.split('_')[1])
+    receipt = get_receipt_by_id(receipt_id)
+    
+    if receipt:
+        user_id = receipt[1]
+        update_receipt_status(receipt_id, 'rejected')
+        
+        # Отправляем уведомление пользователю
+        try:
+            bot.send_message(
+                user_id,
+                "❌ Ваша квитанция отклонена. Пожалуйста, свяжитесь с поддержкой для уточнения деталей."
+            )
+        except:
+            pass
+        
+        bot.answer_callback_query(call.id, "❌ Квитанция отклонена")
+        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
+        bot.send_message(call.message.chat.id, f"❌ Квитанция #{receipt_id} отклонена")
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith('reply_'))
+def reply_to_receipt(call):
+    if call.from_user.id not in ADMIN_IDS:
+        return
+    
+    receipt_id = int(call.data.split('_')[1])
+    receipt = get_receipt_by_id(receipt_id)
+    
+    if receipt:
+        user_id = receipt[1]
+        admin_reply_states[call.from_user.id] = {
+            'user_id': user_id,
+            'receipt_id': receipt_id
+        }
+        
+        bot.send_message(
+            call.message.chat.id,
+            f"✏️ Введите сообщение для пользователя (квитанция #{receipt_id}):\n"
+            f"(просто напишите текст - он отправится без лишних надписей)"
+        )
+        bot.answer_callback_query(call.id)
+
+@bot.callback_query_handler(func=lambda call: call.data == 'admin_stats')
+def admin_stats(call):
+    if call.from_user.id not in ADMIN_IDS:
+        return
+    
+    conn = sqlite3.connect('bot_database.db')
+    c = conn.cursor()
+    
+    # Статистика пользователей
+    c.execute("SELECT COUNT(*) FROM users")
+    total_users = c.fetchone()[0]
+    
+    c.execute("SELECT COUNT(*) FROM users WHERE date(joined_date) = date('now')")
+    today_users = c.fetchone()[0]
+    
+    # Статистика квитанций
+    c.execute("SELECT COUNT(*) FROM receipts")
+    total_receipts = c.fetchone()[0]
+    
+    c.execute("SELECT COUNT(*) FROM receipts WHERE status = 'pending'")
+    pending_receipts = c.fetchone()[0]
+    
+    c.execute("SELECT COUNT(*) FROM receipts WHERE status = 'approved'")
+    approved_receipts = c.fetchone()[0]
+    
+    c.execute("SELECT SUM(amount) FROM receipts WHERE status = 'approved'")
+    total_earned = c.fetchone()[0] or 0
+    
+    conn.close()
+    
+    text = "📊 Статистика бота:\n\n"
+    text += f"👥 Всего пользователей: {total_users}\n"
+    text += f"📅 За сегодня: {today_users}\n\n"
+    text += f"📝 Всего квитанций: {total_receipts}\n"
+    text += f"⏳ Ожидают: {pending_receipts}\n"
+    text += f"✅ Подтверждено: {approved_receipts}\n"
+    text += f"💰 Заработано: {total_earned:.2f} RUB"
+    
+    bot.send_message(call.message.chat.id, text)
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -532,7 +722,6 @@ def support(message):
 ➡ <b>Написать в поддержку:</b> @{PAYMENT_SETTINGS['support_username']}
 """
     
-    # Просто отправляем текст без фото
     bot.send_message(message.chat.id, support_text, parse_mode='HTML')
 
 @bot.callback_query_handler(func=lambda call: call.data == 'show_categories')
@@ -557,7 +746,7 @@ def view_tariff(call):
     
     markup = types.InlineKeyboardMarkup(row_width=2)
     btn1 = types.InlineKeyboardButton("🇷🇺 Карта РФ", callback_data=f'pay_card_{index}')
-    btn2 = types.InlineKeyboardButton("🇺🇦 Карта УКР", callback_data=f'pay_ukr_card_{index}')  # Новая кнопка
+    btn2 = types.InlineKeyboardButton("🇺🇦 Карта УКР", callback_data=f'pay_ukr_card_{index}')
     btn3 = types.InlineKeyboardButton("💵 Крипта", callback_data=f'pay_crypto_{index}')
     btn4 = types.InlineKeyboardButton("🤖 CryptoBot", callback_data=f'pay_cryptobot_{index}')
     btn5 = types.InlineKeyboardButton("⭐️ Stars", callback_data=f'pay_stars_{index}')
@@ -579,8 +768,6 @@ def pay_card(call):
     index = int(call.data[9:])
     tariff = tariffs_data[index]
     
-    # Оборачиваем номер карты в <code></code>
-    # Также используем <b></b> для жирности, чтобы выглядело солиднее
     card_number = PAYMENT_SETTINGS['card_number']
     
     text = f"<b>Тариф:</b> {tariff['name']}\n" \
@@ -601,23 +788,20 @@ def pay_card(call):
         message_id=call.message.message_id,
         text=text,
         reply_markup=markup,
-        parse_mode='HTML'  # ОБЯЗАТЕЛЬНО добавь это
+        parse_mode='HTML'
     )
     
-    # Уведомление админам
     notify_admins(
         "💳 Запрос на оплату картой РФ", 
         call.from_user,
         f"Тариф: {tariff['name']}\nСумма: {tariff['price_rub']}₽"
     )
 
-# Новая функция для оплаты украинской картой
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_ukr_card_'))
 def pay_ukr_card(call):
     index = int(call.data[13:])
     tariff = tariffs_data[index]
     
-    # Номер украинской карты
     ukr_card_number = PAYMENT_SETTINGS['ukr_card_number']
     
     text = f"<b>Тариф:</b> {tariff['name']}\n" \
@@ -642,7 +826,6 @@ def pay_ukr_card(call):
         parse_mode='HTML'
     )
     
-    # Уведомление админам
     notify_admins(
         "💳 Запрос на оплату картой УКР", 
         call.from_user,
@@ -674,7 +857,6 @@ TRC20 - {PAYMENT_SETTINGS['trc20_wallet']}"""
         reply_markup=markup
     )
     
-    # Уведомление админам о запросе оплаты
     notify_admins(
         "💰 Запрос на оплату криптовалютой", 
         call.from_user,
@@ -704,7 +886,6 @@ def pay_cryptobot(call):
         reply_markup=markup
     )
     
-    # Уведомление админам о запросе оплаты
     notify_admins(
         "🤖 Запрос на оплату через CryptoBot", 
         call.from_user,
@@ -743,7 +924,6 @@ def pay_stars(call):
         reply_markup=markup
     )
     
-    # Уведомление админам о запросе оплаты
     notify_admins(
         "⭐️ Запрос на оплату Stars", 
         call.from_user,
@@ -785,13 +965,39 @@ def paid(call):
 def handle_receipt(message):
     user_id = message.from_user.id
     
+    # Проверяем, находится ли админ в режиме ответа
+    if user_id in admin_reply_states:
+        state = admin_reply_states[user_id]
+        target_user_id = state['user_id']
+        receipt_id = state['receipt_id']
+        
+        # Отправляем сообщение пользователю без изменений
+        try:
+            # Если это фото с подписью
+            if message.content_type == 'photo' and message.caption:
+                bot.send_photo(target_user_id, message.photo[-1].file_id, caption=message.caption)
+            # Если просто фото
+            elif message.content_type == 'photo':
+                bot.send_photo(target_user_id, message.photo[-1].file_id)
+            # Если текст
+            else:
+                bot.send_message(target_user_id, message.text)
+            
+            bot.reply_to(message, f"✅ Сообщение отправлено пользователю (квитанция #{receipt_id})")
+        except Exception as e:
+            bot.reply_to(message, f"❌ Ошибка при отправке: {e}")
+        
+        # Очищаем состояние админа
+        del admin_reply_states[user_id]
+        return
+    
     # Проверяем, ожидает ли пользователь отправки квитанции
     if user_id in user_states and user_states[user_id].get("waiting_receipt"):
         state = user_states[user_id]
         tariff = tariffs_data[state["tariff_index"]]
         method_map = {
             "card": "картой РФ",
-            "ukr_card": "картой УКР",  # Добавлен новый метод
+            "ukr_card": "картой УКР",
             "crypto": "криптовалютой",
             "cryptobot": "CryptoBot",
             "stars": "Stars"
@@ -810,7 +1016,7 @@ def handle_receipt(message):
         
         # Сохраняем квитанцию в БД
         if message.content_type == 'photo':
-            add_receipt(
+            receipt_id = add_receipt(
                 user_id, 
                 tariff['name'], 
                 method, 
@@ -820,10 +1026,10 @@ def handle_receipt(message):
             )
             
             # Уведомление админам с фото
-            caption = f"📸 Получена квитанция (фото)\n\n👤 Пользователь: {message.from_user.first_name} (@{message.from_user.username}) ID: {user_id}\nТариф: {tariff['name']}\nСпособ оплаты: {method}\nСумма: {amount}"
+            caption = f"📸 Получена квитанция (фото) #{receipt_id}\n\n👤 Пользователь: {message.from_user.first_name} (@{message.from_user.username}) ID: {user_id}\nТариф: {tariff['name']}\nСпособ оплаты: {method}\nСумма: {amount}"
             notify_admins_photo(message.from_user, message.photo[-1].file_id, caption)
         else:
-            add_receipt(
+            receipt_id = add_receipt(
                 user_id, 
                 tariff['name'], 
                 method, 
@@ -833,7 +1039,7 @@ def handle_receipt(message):
             
             # Уведомление админам с текстом
             notify_admins(
-                "📝 Получена квитанция (текст)", 
+                f"📝 Получена квитанция (текст) #{receipt_id}", 
                 message.from_user,
                 f"Тариф: {tariff['name']}\nСпособ оплаты: {method}\nСумма: {amount}\n\nТекст: {message.text}"
             )

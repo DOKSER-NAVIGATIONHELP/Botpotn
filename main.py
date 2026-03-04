@@ -834,42 +834,11 @@ def pay_ukr_card(call):
         f"Тариф: {tariff['name']}\nСумма: {tariff['price_uah']}₴"
     )
 
-@bot.callback_query_handler(func=lambda call: call.data.startswith('pay_crypto_'))
-def pay_crypto(call):
-    # Исправлено: правильное извлечение индекса
-    index = int(call.data.split('_')[2])  # Берем третий элемент после разделения
-    tariff = tariffs_data[index]
-    
-    text = f"""Тариф: {tariff['name']}
-Способ оплаты: 💵 Перевод криптовалюты
-Сумма к оплате: {tariff['price_usd']}$.
-Информация об оплате:
-TON - {PAYMENT_SETTINGS['ton_wallet']}
-
-TRC20 - {PAYMENT_SETTINGS['trc20_wallet']}"""
-
-    markup = types.InlineKeyboardMarkup(row_width=2)
-    btn1 = types.InlineKeyboardButton("✅ Я оплатил", callback_data=f'paid_{index}_crypto')
-    btn2 = types.InlineKeyboardButton("✖️ Отменить", callback_data='show_categories')
-    markup.add(btn1, btn2)
-    
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text=text,
-        reply_markup=markup
-    )
-    
-    notify_admins(
-        "💰 Запрос на оплату криптовалютой", 
-        call.from_user,
-        f"Тариф: {tariff['name']}\nСумма: {tariff['price_usd']}$"
-    )
-
 # ИСПРАВЛЕННАЯ ФУНКЦИЯ ДЛЯ CRYPTOBOT
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_cryptobot_'))
 def pay_cryptobot(call):
-    index = int(call.data[13:])
+    # Используем split для надежного получения ID тарифа
+    index = int(call.data.split('_')[2]) 
     tariff = tariffs_data[index]
     
     # Добавляем кнопку с ссылкой на CryptoBot

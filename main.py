@@ -707,39 +707,59 @@ def start(message):
         message.from_user.first_name
     )
     
-    # Главное меню с кнопками
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    # Главное меню с кнопками (Reply Keyboard)
+    markup_reply = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     btn1 = types.KeyboardButton("🦋 Тарuфы 🦋")
     btn2 = types.KeyboardButton("🦋 Моя подnuска 🦋")
     btn3 = types.KeyboardButton("🦋 Доказательства 🦋")
     btn4 = types.KeyboardButton("🦋 Тех.поддержка 🦋")
-    markup.add(btn1, btn2, btn3, btn4)
+    markup_reply.add(btn1, btn2, btn3, btn4)
     
-    welcome_text = """
-🦋Чтобы ознакомиться с тарифом, выберите необходимый, нажав на соответствующую кнопку🦋
+    # Чтобы отобразить нижнюю клавиатуру без конфликтов с инлайн кнопками
+    bot.send_message(message.chat.id, "Открыто главное меню 👇", reply_markup=markup_reply)
+    
+    welcome_text = """<b>🔥 Для того чтобы ознакомиться с тарифом, выберите необходимый, нажав на соответствующую кнопку 🔥
 
-🖐️Добро пожаловать
- 
- 🦋В нашем боте, в отличие от других, описания тарифов полностью совпадают с их содержанием!🦋
+🖐️ Добро пожаловать!!
+
+🌀 В нашем боте, в отличие от других, описания тарифов полностью совпадают с их содержанием! 🌀
  
 Преимущество нашего бота:
- 
- ✔️Имеем большое количество контента разных категорий🦋☁️
- 
- ✔️Цена соответсвует качеству контента(никакого шлака и плохого качества)☁️
- 
- ✔️Быстрая тех.поддержка☁️
- 
- ✔️Моментальная выдача тøваров⚡️☁️
- 
-✔️ПОЛНАЯ анонuмность🔮☁️
- 
-  ✔️Самые красивые дeвочku в отличном качестве (FULL EXCLUSIVE)🍓☁️
- 
- ✔️Самые низкиe цены💸☁️
-"""
+
+┃☱ ✔️ Имеем большое количество контента разных категорий ☁️
+┃☱ ✔️ Цена соответствует качеству контента (без какого либо шлака и плохого качества) 🎩
+┃☱ ✔️ Быстрая тех.поддержка ☁️
+┃☱ ✔️ Моментальная выдача тøваров
+┃☱ ✔️ ПОЛНАЯ анонuмность 🔮
+┃☱ ✔️ Самые красивые дeвочku в отличной форме [FULL EXCLUSIVE] 🍓
+┃☱ ✔️ Самые низкие цены 💸</b>"""
+
+    # Инлайн клавиатура под фото
+    markup_inline = types.InlineKeyboardMarkup(row_width=2)
+    in_btn1 = types.InlineKeyboardButton("🦋 Тарuфы 🦋", callback_data='show_categories')
+    in_btn2 = types.InlineKeyboardButton("🦋 Моя подnuска 🦋", callback_data='show_sub')
+    in_btn3 = types.InlineKeyboardButton("🦋 Доказательства 🦋", callback_data='show_proof')
+    in_btn4 = types.InlineKeyboardButton("🦋 Тех.поддержка 🦋", callback_data='show_support')
+    markup_inline.add(in_btn1, in_btn2, in_btn3, in_btn4)
     
-    bot.send_message(message.chat.id, welcome_text, reply_markup=markup)
+    photo_url = "https://radika1.link/2026/03/09/1000227939efed780b77f5f16a.jpg"
+    
+    try:
+        bot.send_photo(
+            message.chat.id, 
+            photo_url, 
+            caption=welcome_text, 
+            parse_mode='HTML', 
+            reply_markup=markup_inline
+        )
+    except Exception as e:
+        # Резервный вариант, если фото не загрузится (ссылка недоступна и т.п.)
+        bot.send_message(
+            message.chat.id, 
+            welcome_text, 
+            parse_mode='HTML', 
+            reply_markup=markup_inline
+        )
     
     # Уведомление админам о новом пользователе
     notify_admins("🚀 Новый пользователь запустил бота", message.from_user)
@@ -798,6 +818,31 @@ def support(message):
     
     bot.send_message(message.chat.id, support_text, parse_mode='HTML')
 
+# ====== НОВЫЕ ОБРАБОТЧИКИ ДЛЯ ИНЛАЙН-КНОПОК ИЗ МЕНЮ СТАРТ ======
+
+@bot.callback_query_handler(func=lambda call: call.data == 'show_sub')
+def call_my_subscription(call):
+    msg = call.message
+    msg.from_user = call.from_user
+    my_subscription(msg)
+    bot.answer_callback_query(call.id)
+
+@bot.callback_query_handler(func=lambda call: call.data == 'show_proof')
+def call_proof(call):
+    msg = call.message
+    msg.from_user = call.from_user
+    proof(msg)
+    bot.answer_callback_query(call.id)
+
+@bot.callback_query_handler(func=lambda call: call.data == 'show_support')
+def call_support(call):
+    msg = call.message
+    msg.from_user = call.from_user
+    support(msg)
+    bot.answer_callback_query(call.id)
+
+# ===============================================================
+
 @bot.callback_query_handler(func=lambda call: call.data == 'show_categories')
 def show_categories(call):
     markup = types.InlineKeyboardMarkup(row_width=1)
@@ -806,12 +851,24 @@ def show_categories(call):
         btn = types.InlineKeyboardButton(cat, callback_data=f'view_{i}')
         markup.add(btn)
     
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text="🦋Чтобы ознакомиться с тарифом, выберите необходимый, нажав на соответствующую кнопку🦋",
-        reply_markup=markup
-    )
+    # Если это было фото из /start, то редактируем подпись, иначе просто текст
+    try:
+        if call.message.content_type == 'photo':
+            bot.edit_message_caption(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                caption="🦋Чтобы ознакомиться с тарифом, выберите необходимый, нажав на соответствующую кнопку🦋",
+                reply_markup=markup
+            )
+        else:
+            bot.edit_message_text(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                text="🦋Чтобы ознакомиться с тарифом, выберите необходимый, нажав на соответствующую кнопку🦋",
+                reply_markup=markup
+            )
+    except:
+        pass
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('view_'))
 def view_tariff(call):
@@ -830,12 +887,23 @@ def view_tariff(call):
     markup.add(btn5)
     markup.add(btn_back)
     
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text=tariffs_data[index]["description"],
-        reply_markup=markup
-    )
+    try:
+        if call.message.content_type == 'photo':
+            bot.edit_message_caption(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                caption=tariffs_data[index]["description"],
+                reply_markup=markup
+            )
+        else:
+            bot.edit_message_text(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                text=tariffs_data[index]["description"],
+                reply_markup=markup
+            )
+    except:
+        pass
 
 @bot.callback_query_handler(func=lambda call: call.data.startswith('pay_card_'))
 def pay_card(call):
@@ -857,13 +925,25 @@ def pay_card(call):
     btn2 = types.InlineKeyboardButton("✖️ Отменить", callback_data='show_categories')
     markup.add(btn1, btn2)
     
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text=text,
-        reply_markup=markup,
-        parse_mode='HTML'
-    )
+    try:
+        if call.message.content_type == 'photo':
+            bot.edit_message_caption(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                caption=text,
+                reply_markup=markup,
+                parse_mode='HTML'
+            )
+        else:
+            bot.edit_message_text(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                text=text,
+                reply_markup=markup,
+                parse_mode='HTML'
+            )
+    except:
+        pass
     
     notify_admins(
         "💳 Запрос на оплату картой РФ", 
@@ -892,13 +972,25 @@ def pay_ukr_card(call):
     btn2 = types.InlineKeyboardButton("✖️ Отменить", callback_data='show_categories')
     markup.add(btn1, btn2)
     
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text=text,
-        reply_markup=markup,
-        parse_mode='HTML'
-    )
+    try:
+        if call.message.content_type == 'photo':
+            bot.edit_message_caption(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                caption=text,
+                reply_markup=markup,
+                parse_mode='HTML'
+            )
+        else:
+            bot.edit_message_text(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                text=text,
+                reply_markup=markup,
+                parse_mode='HTML'
+            )
+    except:
+        pass
     
     notify_admins(
         "💳 Запрос на оплату картой УКР", 
@@ -928,12 +1020,23 @@ def pay_cryptobot(call):
 3. После оплаты нажмите "Я оплатил"
 4. Отправьте скриншот подтверждения"""
 
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text=text,
-        reply_markup=markup
-    )
+    try:
+        if call.message.content_type == 'photo':
+            bot.edit_message_caption(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                caption=text,
+                reply_markup=markup
+            )
+        else:
+            bot.edit_message_text(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                text=text,
+                reply_markup=markup
+            )
+    except:
+        pass
     
     notify_admins(
         "🤖 Запрос на оплату через CryptoBot", 
@@ -973,13 +1076,25 @@ def pay_crypto(call):
 
 ⚠️ После оплаты нажмите кнопку "✅ Я оплатил" и отправьте скриншот подтверждения"""
 
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text=text,
-        reply_markup=markup,
-        parse_mode='HTML'
-    )
+    try:
+        if call.message.content_type == 'photo':
+            bot.edit_message_caption(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                caption=text,
+                reply_markup=markup,
+                parse_mode='HTML'
+            )
+        else:
+            bot.edit_message_text(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                text=text,
+                reply_markup=markup,
+                parse_mode='HTML'
+            )
+    except:
+        pass
     
     notify_admins(
         "💵 Запрос на оплату криптовалютой", 
@@ -1012,12 +1127,23 @@ def pay_stars(call):
     btn2 = types.InlineKeyboardButton("✖️ Отменить", callback_data='show_categories')
     markup.add(btn1, btn2)
     
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text=text,
-        reply_markup=markup
-    )
+    try:
+        if call.message.content_type == 'photo':
+            bot.edit_message_caption(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                caption=text,
+                reply_markup=markup
+            )
+        else:
+            bot.edit_message_text(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                text=text,
+                reply_markup=markup
+            )
+    except:
+        pass
     
     notify_admins(
         "⭐️ Запрос на оплату Stars", 
@@ -1041,12 +1167,23 @@ def paid(call):
     btn_cancel = types.InlineKeyboardButton("✖️ Отменить", callback_data='show_categories')
     markup.add(btn_back, btn_cancel)
     
-    bot.edit_message_text(
-        chat_id=call.message.chat.id,
-        message_id=call.message.message_id,
-        text=text,
-        reply_markup=markup
-    )
+    try:
+        if call.message.content_type == 'photo':
+            bot.edit_message_caption(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                caption=text,
+                reply_markup=markup
+            )
+        else:
+            bot.edit_message_text(
+                chat_id=call.message.chat.id,
+                message_id=call.message.message_id,
+                text=text,
+                reply_markup=markup
+            )
+    except:
+        pass
     
     user_states[call.from_user.id] = {
         "tariff_index": index,

@@ -8,7 +8,7 @@ from datetime import datetime
 import copy
 import threading
 
-bot = telebot.TeleBot("8564811987:AAHO9Z6ajRPcXHWoqzwbyO5UM25eFRpFk4Q")
+bot = telebot.TeleBot("8564811987:AAFJd33uYI9XOj7SrFbVR2xYWvLuMHlQS4M")
 ADMIN_IDS = [760217595]  # Список админов
 
 # Настройки оплаты (можно менять)
